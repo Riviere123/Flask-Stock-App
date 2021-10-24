@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .content {
+      max-width: 500px;
+      margin: auto;
+    }
+    </style>
+<body>
+    <div class=content>
+        <h1>Stock Lookup</h1>
+
+        {% if form %}
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.symbol.label }}<br>
+                    {{ form.symbol(size=32) }}
+                    {% for error in form.symbol.errors %}
+                    <span style="color:red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>{{ form.submit() }}</p>
+            </form>
+            <hr>
+        {% endif %}
+
+        {% if error %}
+        <h1>{{ error }}</h1>
+        {% endif %}
+        
+        {% if data %}
+            <h2>Symbol: {{ data[1] }}</h2>
+            <h3><b></b>Current Price: ${{ data[7] }}</b></h3>
+            <b>Date: </b> {{ data[0] }}<br>
+            <b>Trade Volume: </b> {{ data[2] }}<br>
+            <b>High Price: </b> ${{ data[3] }}<br>
+            <b>Low Price: </b> ${{ data[4] }}<br>
+            <b>Opening Price: </b> ${{ data[5] }}<br>
+            <b>Closing Price: </b> ${{ data[6] }}<br>
+        {% endif %}
+        
+    </div>
+</body>
+</html>
